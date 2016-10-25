@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="br.jrfy.wsminhasvacinas.mappers.VacinaMapper">
+  <select id="findAllVacinaByFilter" resultType="br.jrfy.wsminhasvacinas.models.Vacina">
+     select
+      ci_vacina as id,
+      nm_vacina as nome,
+      ds_vacina as descricao,
+      ds_efeitoscolaterais as efeitosColaterais 
+     from minhasvacinas.tb_vacina where true
+     <if test="id != null">
+		and ci_vacina = #{id}     
+     </if>
+     <if test="nome != null">
+		and nm_vacina ilike '%'||#{nome}||'%'     
+     </if>
+     order by nm_vacina
+  </select>
+</mapper>
