@@ -2,8 +2,10 @@ package br.jrfy.wsminhasvacinas.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_empresa_pessoa", schema="minhasvacinas")
@@ -27,11 +31,11 @@ public class EmpresaPessoa implements Serializable{
 	@Column(name="ci_empresa_pessoa")
 	private BigDecimal id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cd_empresa")
 	private Empresa empresa;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cd_pessoa")
 	private Pessoa pessoa;
 	
@@ -39,7 +43,9 @@ public class EmpresaPessoa implements Serializable{
 	@JoinColumn(name="cd_nivel")
 	private Nivel nivel;
 	
-	@Column(name="dt_criacao")
+	@Basic(optional=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="dt_criacao", insertable=false, updatable=false)
 	private Date criacao;
 
 	public BigDecimal getId() {

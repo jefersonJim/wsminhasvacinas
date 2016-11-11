@@ -1,14 +1,17 @@
 package br.jrfy.wsminhasvacinas.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_empresa", schema="minhasvacinas")
@@ -31,12 +34,14 @@ public class Empresa implements Serializable{
 	private String logradouro;
 	
 	@Column(name="nr_logradouro")
-	private String numeroLogradouro;
+	private Integer numeroLogradouro;
 	
 	@Column(name="nr_cep")
 	private String cep;
 	
-	@Column(name="dt_criacao")
+	@Basic(optional=false)
+	@Column(name="dt_criacao", insertable=false, updatable=false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date criacao;
 	
 	public Integer getId() {
@@ -63,10 +68,11 @@ public class Empresa implements Serializable{
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	public String getNumeroLogradouro() {
+	
+	public Integer getNumeroLogradouro() {
 		return numeroLogradouro;
 	}
-	public void setNumeroLogradouro(String numeroLogradouro) {
+	public void setNumeroLogradouro(Integer numeroLogradouro) {
 		this.numeroLogradouro = numeroLogradouro;
 	}
 	public String getCep() {

@@ -2,14 +2,17 @@ package br.jrfy.wsminhasvacinas.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_pessoa", schema="minhasvacinas")
@@ -46,7 +49,9 @@ public class Pessoa implements Serializable{
 	@Column(name="ds_senha")
 	private String senha;
 	
-	@Column(name="dt_criacao")
+	@Basic(optional=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="dt_criacao", insertable=false, updatable=false)
 	private Date criacao;
 
 	public BigDecimal getId() {
