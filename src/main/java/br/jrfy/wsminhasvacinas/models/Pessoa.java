@@ -32,7 +32,7 @@ public class Pessoa implements Serializable{
 	private String nome;
 	
 	@Column(name="nr_cpf")
-	private Integer cpf;
+	private Long cpf;
 	
 	@Column(name="nr_telefone")
 	private Integer telefone;
@@ -70,11 +70,11 @@ public class Pessoa implements Serializable{
 		this.nome = nome;
 	}
 
-	public Integer getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 
